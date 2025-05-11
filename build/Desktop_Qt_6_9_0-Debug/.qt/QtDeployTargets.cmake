@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_birthday_reminder_FILE /home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/birthday_reminder)
-set(__QT_DEPLOY_TARGET_birthday_reminder_TYPE EXECUTABLE)

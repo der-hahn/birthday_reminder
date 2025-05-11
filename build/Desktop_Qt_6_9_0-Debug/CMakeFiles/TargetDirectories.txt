@@ -1,9 +1,0 @@
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/birthday_reminder.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/edit_cache.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/rebuild_cache.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/list_install_components.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install/local.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install/strip.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/birthday_reminder_autogen_timestamp_deps.dir
-/home/mario/Schreibtisch/birthday_reminder/birthday_reminder/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/birthday_reminder_autogen.dir
