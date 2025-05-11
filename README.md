@@ -7,3 +7,6 @@
 5. Go into folder with "cd build"
 6. cmake ..
 7. make
+   
+# Alternative
+Open Cmakelists.txt in Qt Creator
