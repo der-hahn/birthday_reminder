@@ -47,7 +47,7 @@ jobs:
     steps:
 
     - name: Install Qt
-    - uses: jurplel/install-qt-action@v4
+      uses: jurplel/install-qt-action@v4
     
     - uses: actions/checkout@v4
 
