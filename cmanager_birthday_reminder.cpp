@@ -67,3 +67,39 @@ void CManager_birthday_reminder::FillvecPerson()
         m_vecPerson.push_back(person);
     }
 }
+
+CManager_birthday_reminder::structperson CManager_birthday_reminder::GetPersonByID(int ipkpersons)
+{
+    QString strSQL = "select ID, SURNAME, FORENAME, BIRTHDATE from Persons";
+    strSQL += " where ID = " + QString::number(ipkpersons);
+
+    QSqlQuery query(strSQL);
+
+    bool b_ok = query.exec(strSQL);
+
+    if(!b_ok)
+    {
+        QMessageBox msgbox;
+        msgbox.setWindowTitle("Error");
+        msgbox.setText("Error select from Persons\n" + query.lastError().text());
+        msgbox.exec();
+    }
+
+    structperson person;
+
+    if (query.next()) {
+        person.iid = query.value("ID").toInt();
+        person.strsurname = query.value("SURNAME").toString();
+        person.strforename = query.value("FORENAME").toString();
+        person.birthdate = query.value("BIRTHDATE").toDate();
+    }
+    else
+    {
+        QMessageBox msgbox;
+        msgbox.setWindowTitle("Error");
+        msgbox.setText("Person with ID " + QString::number(ipkpersons) + " not existing.");
+        msgbox.exec();
+    }
+
+    return person;
+}

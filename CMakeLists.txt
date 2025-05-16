@@ -26,6 +26,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         cdia_add_birthdate.h cdia_add_birthdate.cpp cdia_add_birthdate.ui
         cmanager_birthday_reminder.h cmanager_birthday_reminder.cpp
+        resource.qrc
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET birthday_reminder APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

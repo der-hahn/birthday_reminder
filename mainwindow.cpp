@@ -8,21 +8,26 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
     Refresh();
 }
 
 void MainWindow::FillSpread()
 {
 
-    ui->tableWidget->reset();
-    ui->tableWidget->setRowCount(0);
+
+
 
     CManager_birthday_reminder::vecPerson* pvecPerson = m_manager_birthday_reminder.GetpvecPerson();
+
+    ui->tableWidget->reset();
+    ui->tableWidget->setRowCount(pvecPerson->size());
+
     int irow = 0;
 
     for(auto& person : *pvecPerson)
     {
-        ui->tableWidget->setRowCount( ui->tableWidget->rowCount() + 1);
 
         auto pitem_id = new QTableWidgetItem;
         pitem_id->setData(Qt::EditRole, person.iid);
@@ -48,6 +53,7 @@ void MainWindow::FillSpread()
 
         irow++;
     }
+    ui->tableWidget->selectRow(0);
 }
 
 void MainWindow::Refresh()
@@ -62,17 +68,60 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionHinzufuegen_triggered()
+
+/*void MainWindow::on_actionadd_triggered()
 {
-    CDIA_ADD_BIRTHDATE* pdlg = new CDIA_ADD_BIRTHDATE(this);
+    CDIA_ADD_BIRTHDATE dlg;
 
-    connect(pdlg, &CDIA_ADD_BIRTHDATE::CloseSignal, [this, pdlg](){
-        if(pdlg->m_bsaved)
-        {
-            this->Refresh();
-        }
-    });
+    dlg.exec();
 
-    pdlg->show();
+    if(dlg.IsSaved())
+    {
+        Refresh();
+    }
+}*/
+
+
+void MainWindow::on_actionadd_triggered()
+{
+    CDIA_ADD_BIRTHDATE dlg;
+
+    dlg.exec();
+
+    if(dlg.IsSaved())
+    {
+        Refresh();
+    }
+}
+
+
+void MainWindow::on_actionEdit_triggered()
+{
+    CDIA_ADD_BIRTHDATE dlg;
+
+    int irow = ui->tableWidget->selectedItems().at(0)->row();
+
+    int ipkpersons = ui->tableWidget->item(irow, 0)->data(Qt::EditRole).toInt();
+
+    dlg.SetPKPersons(ipkpersons);
+
+    dlg.exec();
+
+    if(dlg.IsSaved())
+    {
+        Refresh();
+    }
+}
+
+
+void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
+{
+    on_actionEdit_triggered();
+}
+
+
+void MainWindow::on_actionRefresh_triggered()
+{
+    Refresh();
 }
 

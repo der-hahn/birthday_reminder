@@ -13,7 +13,7 @@ public:
 
     typedef struct structpersontag
     {
-        int iid = 0;
+        int iid = -1;
         QString strsurname = "";
         QString strforename = "";
         QDate birthdate;
@@ -26,6 +26,7 @@ public:
     vecPerson* GetpvecPerson(){return &m_vecPerson;}
     void FillvecPerson();
 
+    static structperson GetPersonByID(int ipkpersons);
 private:
     QSqlDatabase m_db;
     vecPerson m_vecPerson;

@@ -20,8 +20,15 @@ public:
 
     void Refresh();
     void FillSpread();
+
 private slots:
-    void on_actionHinzufuegen_triggered();
+    void on_actionadd_triggered();
+
+    void on_actionEdit_triggered();
+
+    void on_tableWidget_cellDoubleClicked(int row, int column);
+
+    void on_actionRefresh_triggered();
 
 private:
     Ui::MainWindow *ui;

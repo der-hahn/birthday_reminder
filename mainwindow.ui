@@ -17,6 +17,15 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTableWidget" name="tableWidget">
+      <property name="editTriggers">
+       <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>ID</string>
@@ -72,20 +81,50 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionHinzufuegen"/>
+   <addaction name="actionadd"/>
+   <addaction name="actionEdit"/>
+   <addaction name="actionRefresh"/>
   </widget>
-  <action name="actionHinzufuegen">
+  <action name="actionadd">
    <property name="icon">
     <iconset theme="QIcon::ThemeIcon::ContactNew"/>
    </property>
    <property name="text">
-    <string>Hinzufügen</string>
+    <string>Add</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/new/prefix1/icons/pencil-color-icon.png</normaloff>:/new/prefix1/icons/pencil-color-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

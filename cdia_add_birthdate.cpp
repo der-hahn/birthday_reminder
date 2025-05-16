@@ -5,11 +5,12 @@
 #include <QSqlError>
 
 CDIA_ADD_BIRTHDATE::CDIA_ADD_BIRTHDATE(QWidget *parent, CManager_birthday_reminder* pmanager_birthday_reminder)
-    : QMainWindow(parent)
+    : QDialog(parent)
     , ui(new Ui::CDIA_ADD_BIRTHDATE)
 {
     ui->setupUi(this);
-    m_bsaved = false;
+    m_bsaved = true;
+    m_ipkpersons = -1;
 }
 
 CDIA_ADD_BIRTHDATE::~CDIA_ADD_BIRTHDATE()
@@ -22,8 +23,17 @@ void CDIA_ADD_BIRTHDATE::on_pushButton_clicked()
     QString strsurname = ui->lineEdit_surname->text();
     QString strforename = ui->lineEdit_forename->text();
     QDate birthdate = ui->dateEdit->date();
+    QString strSQL = "";
 
-    QString strSQL = QString("insert into persons values (NULL, '%1', '%2', '%3')").arg(strsurname).arg(strforename).arg(birthdate.toString("yyyy-MM-dd"));
+    if(m_ipkpersons == -1)
+        strSQL = QString("insert into persons values (NULL, '%1', '%2', '%3')").arg(strsurname).arg(strforename).arg(birthdate.toString("yyyy-MM-dd"));
+    else
+        strSQL = QString("update persons set"
+                " SURNAME = '%1',"
+                " FORENAME = '%2',"
+                " BIRTHDATE = '%3'"
+                " where ID = %4").arg(strsurname).arg(strforename).arg(birthdate.toString("yyyy-MM-dd")).arg(m_ipkpersons);
+
     QSqlQuery query;
     if(!query.exec(strSQL))
     {
@@ -39,8 +49,65 @@ void CDIA_ADD_BIRTHDATE::on_pushButton_clicked()
 
 void CDIA_ADD_BIRTHDATE::closeEvent(QCloseEvent* event)
 {
-    QMainWindow::closeEvent(event);
+    if(!m_bsaved)
+    {
+        QMessageBox msgbox(this);
+        msgbox.setWindowTitle("Warning");
+        msgbox.setText("Changes not saved. Save now?");
+        msgbox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Abort);
+        msgbox.setDefaultButton(QMessageBox::Yes);
+        int iret = msgbox.exec();
 
-    emit CloseSignal();
+        switch (iret) {
+        case QMessageBox::Yes:
+            on_pushButton_clicked();
+            event->accept();
+            break;
+        case QMessageBox::Abort:
+            event->ignore();
+            break;
+        case QMessageBox::No:
+            break;
+            event->accept();
+        }
+    }
 }
 
+void CDIA_ADD_BIRTHDATE::reject()
+{
+    close();
+}
+
+
+void CDIA_ADD_BIRTHDATE::on_lineEdit_surname_textChanged(const QString &arg1)
+{
+    m_bsaved = false;
+}
+
+
+void CDIA_ADD_BIRTHDATE::on_lineEdit_forename_textChanged(const QString &arg1)
+{
+    m_bsaved = false;
+}
+
+
+void CDIA_ADD_BIRTHDATE::on_dateEdit_dateChanged(const QDate &date)
+{
+    m_bsaved = false;
+}
+
+void CDIA_ADD_BIRTHDATE::showEvent(QShowEvent * event)
+{
+
+    QDialog::showEvent(event);
+
+    if(m_ipkpersons != -1)
+    {
+        auto person = CManager_birthday_reminder::GetPersonByID(m_ipkpersons);
+        ui->lineEdit_surname->setText(person.strsurname);
+        ui->lineEdit_forename->setText(person.strforename);
+        ui->dateEdit->setDate(person.birthdate);
+        m_bsaved = true;
+    }
+
+}
