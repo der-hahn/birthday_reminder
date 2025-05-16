@@ -78,14 +78,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
-    - name: Checkout the repository
-      uses: actions/checkout@master
-    - name: Generate the artifacts
-      uses: skx/github-action-build@master
-    - name: Upload the artifacts
-      uses: skx/github-action-publish-binaries@master
-      env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-       args: 'example-*'
+    - name: Install go-task
+      uses: jaxxstorm/action-install-gh-release@v1.10.0
+      with: # Grab the latest version
+       repo: go-task/task
       
