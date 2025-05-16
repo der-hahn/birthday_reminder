@@ -80,9 +80,6 @@ jobs:
 
 
 
-
-    - name: Checkout code
-      uses: actions/checkout@v4 # Holt den Quellcode
     - name: Upload Binaries
       uses: actions/upload-artifact@v4 # Nutzt die Aktion zum Hochladen
       with:
