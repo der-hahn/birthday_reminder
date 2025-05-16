@@ -45,6 +45,10 @@ jobs:
             c_compiler: cl
 
     steps:
+
+    - name: Install Qt
+    - uses: jurplel/install-qt-action@v4
+    
     - uses: actions/checkout@v4
 
     - name: Set reusable strings
