@@ -78,8 +78,13 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
-    - name: Install go-task
-      uses: jaxxstorm/action-install-gh-release@v1.10.0
-      with: # Grab the latest version
-       repo: go-task/task
-      
+
+
+
+    - name: Checkout code
+      uses: actions/checkout@v4 # Holt den Quellcode
+    - name: Upload Binaries
+      uses: actions/upload-artifact@v4 # Nutzt die Aktion zum Hochladen
+      with:
+        name: my-project-binaries # Gib deinem Artefakt einen aussagekräftigen Namen (z.B. build-windows, build-ubuntu, etc.)
+        path: build/
