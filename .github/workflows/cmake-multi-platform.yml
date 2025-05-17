@@ -89,10 +89,12 @@ jobs:
         windeployqt birthday_reminder.exe
 
 
-    - name: release
-      uses: actions/upload-release-assets@v3
+    - name: Upload Binaries
+      uses: actions/upload-artifact@v4
       with:
-        files: "${{ steps.strings.outputs.build-output-dir }}"
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        # Mache den Namen einzigartig für jede Matrix-Kombination
+        name: my-project-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ matrix.build_type }}
+        path: build/
+        # retention-days: 7 # Optional, falls du sie nicht ewig brauchst
         
         
