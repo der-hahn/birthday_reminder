@@ -87,10 +87,27 @@ jobs:
         cd ${{ steps.strings.outputs.build-output-dir }}
         cd Release
         windeployqt birthday_reminder.exe
+
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@v6
+      with:
+        # either 'goreleaser' (default) or 'goreleaser-pro'
+        distribution: goreleaser
+        # 'latest', 'nightly', or a semver
+        version: '~> v2'
+        args: release --clean
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution
+        # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
         
 
-    - name: Upload Binaries
-      uses: actions/upload-artifact@v4 # Nutzt die Aktion zum Hochladen
-      with:
-        name: my-project-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ matrix.build_type }}
-        path: build/
+    #- name: Upload Binaries
+      #uses: actions/upload-artifact@v4 # Nutzt die Aktion zum Hochladen
+      #with:
+        #name: my-project-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ matrix.build_type }}
+        #path: build/
