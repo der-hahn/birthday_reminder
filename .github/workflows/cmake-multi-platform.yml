@@ -77,6 +77,19 @@ jobs:
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
+      
+
+    - name: Deploy Qt application (Windows)
+      # Dieser Schritt soll nur auf Windows laufen
+      if: runner.os == 'Windows'
+      shell: cmd # Unter Windows ist cmd oder powershell oft besser für ausführbare Dateien
+      run: |
+        # Wechsle in das Build-Verzeichnis, in dem die .exe liegt
+        cd ${{ steps.strings.outputs.build-output-dir }}
+        # Führe windeployqt für deine .exe-Datei aus
+        # Ersetze 'YourAppName.exe' durch den tatsächlichen Namen deiner ausführbaren Datei
+        windeployqt birthday_reminder.exe
+        
 
     - name: Upload Binaries
       uses: actions/upload-artifact@v4 # Nutzt die Aktion zum Hochladen
