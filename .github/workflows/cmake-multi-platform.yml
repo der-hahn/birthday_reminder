@@ -84,10 +84,7 @@ jobs:
       if: runner.os == 'Windows'
       shell: cmd # Unter Windows ist cmd oder powershell oft besser für ausführbare Dateien
       run: |
-        # Wechsle in das Build-Verzeichnis, in dem die .exe liegt
         cd ${{ steps.strings.outputs.build-output-dir }}
-        # Führe windeployqt für deine .exe-Datei aus
-        # Ersetze 'YourAppName.exe' durch den tatsächlichen Namen deiner ausführbaren Datei
         windeployqt birthday_reminder.exe
         
 
