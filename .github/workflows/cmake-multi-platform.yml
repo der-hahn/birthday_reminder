@@ -85,6 +85,7 @@ jobs:
       shell: cmd # Unter Windows ist cmd oder powershell oft besser für ausführbare Dateien
       run: |
         cd ${{ steps.strings.outputs.build-output-dir }}
+        cd Release
         windeployqt birthday_reminder.exe
         
 
