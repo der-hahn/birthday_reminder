@@ -12,3 +12,11 @@
    
 # Alternative
 Open Cmakelists.txt in Qt Creator
+
+# Binaries 
+Binaries are in Releases
+1. Download zip-file for Linux or Windows
+2. unzip file
+3. Open binary
+   - For Linux: Go into the folder -> run birthday_reminder
+   - For Windows: Go into the Folder and then into Releases -> run birthday_reminder.exe
