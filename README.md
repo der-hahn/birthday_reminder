@@ -1,4 +1,7 @@
 # Birthday Reminder
+
+You are free to use this code and program as you want to.
+
 # Prerequirements for building
 - Qt 6.9.0
 # Build
