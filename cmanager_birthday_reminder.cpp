@@ -103,3 +103,23 @@ CManager_birthday_reminder::structperson CManager_birthday_reminder::GetPersonBy
 
     return person;
 }
+
+bool CManager_birthday_reminder::DeletePerson(int ipkpersons)
+{
+    QString strSQL = "delete from persons where ID = " + QString::number(ipkpersons);
+
+    QSqlQuery query;
+
+    bool b_ok = query.exec(strSQL);
+
+    if(!b_ok)
+    {
+        QMessageBox msgbox;
+        msgbox.setWindowTitle("Error");
+        msgbox.setText("Error delete from Persons\n" + query.lastError().text());
+        msgbox.exec();
+        return false;
+    }
+
+    return true;
+}

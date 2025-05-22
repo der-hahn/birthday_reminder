@@ -10,6 +10,7 @@ CDIA_ADD_BIRTHDATE::CDIA_ADD_BIRTHDATE(QWidget *parent, CManager_birthday_remind
 {
     ui->setupUi(this);
     m_bsaved = true;
+    m_bedited = false;
     m_ipkpersons = -1;
 }
 
@@ -73,7 +74,7 @@ void CDIA_ADD_BIRTHDATE::closeEvent(QCloseEvent* event)
     }
 }
 
-void CDIA_ADD_BIRTHDATE::reject()
+void CDIA_ADD_BIRTHDATE::reject()   //if escape was pressed
 {
     close();
 }
@@ -82,18 +83,21 @@ void CDIA_ADD_BIRTHDATE::reject()
 void CDIA_ADD_BIRTHDATE::on_lineEdit_surname_textChanged(const QString &arg1)
 {
     m_bsaved = false;
+    m_bedited = true;
 }
 
 
 void CDIA_ADD_BIRTHDATE::on_lineEdit_forename_textChanged(const QString &arg1)
 {
     m_bsaved = false;
+    m_bedited = true;
 }
 
 
 void CDIA_ADD_BIRTHDATE::on_dateEdit_dateChanged(const QDate &date)
 {
     m_bsaved = false;
+    m_bedited = true;
 }
 
 void CDIA_ADD_BIRTHDATE::showEvent(QShowEvent * event)
@@ -108,6 +112,7 @@ void CDIA_ADD_BIRTHDATE::showEvent(QShowEvent * event)
         ui->lineEdit_forename->setText(person.strforename);
         ui->dateEdit->setDate(person.birthdate);
         m_bsaved = true;
+        m_bedited = false;
     }
 
 }

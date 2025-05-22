@@ -30,6 +30,10 @@ private slots:
 
     void on_actionRefresh_triggered();
 
+    void on_actionDelete_triggered();
+
+    void on_actionControls_triggered();
+
 private:
     Ui::MainWindow *ui;
     CManager_birthday_reminder m_manager_birthday_reminder;

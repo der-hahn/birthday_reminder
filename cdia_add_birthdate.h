@@ -18,6 +18,7 @@ public:
     ~CDIA_ADD_BIRTHDATE();
 
     bool IsSaved(){return m_bsaved;}
+    bool IsEdited(){return m_bedited;}
 
     void SetPKPersons(int ipkpersons){m_ipkpersons = ipkpersons;}
 
@@ -37,6 +38,7 @@ private slots:
 private:
     Ui::CDIA_ADD_BIRTHDATE *ui;
     bool m_bsaved;
+    bool m_bedited;
 
     int m_ipkpersons;
 

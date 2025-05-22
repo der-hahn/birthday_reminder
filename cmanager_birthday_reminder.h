@@ -27,6 +27,7 @@ public:
     void FillvecPerson();
 
     static structperson GetPersonByID(int ipkpersons);
+    static bool DeletePerson(int ipkpersons);
 private:
     QSqlDatabase m_db;
     vecPerson m_vecPerson;

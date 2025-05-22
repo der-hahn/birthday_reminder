@@ -64,6 +64,13 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionControls"/>
+   </widget>
+   <addaction name="menuEdit"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -84,6 +91,7 @@
    <addaction name="actionadd"/>
    <addaction name="actionEdit"/>
    <addaction name="actionRefresh"/>
+   <addaction name="actionDelete"/>
   </widget>
   <action name="actionadd">
    <property name="icon">
@@ -91,6 +99,9 @@
    </property>
    <property name="text">
     <string>Add</string>
+   </property>
+   <property name="shortcut">
+    <string>Return</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -105,7 +116,7 @@
     <string>Edit</string>
    </property>
    <property name="shortcut">
-    <string>Return</string>
+    <string>Ctrl+Return</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -118,8 +129,30 @@
    <property name="text">
     <string>Refresh</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionControls">
+   <property name="text">
+    <string>&amp;Controls</string>
    </property>
   </action>
  </widget>

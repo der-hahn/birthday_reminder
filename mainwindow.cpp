@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include "cdia_add_birthdate.h"
 
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -86,9 +88,11 @@ void MainWindow::on_actionadd_triggered()
 {
     CDIA_ADD_BIRTHDATE dlg;
 
+    dlg.setWindowTitle("Add");
+
     dlg.exec();
 
-    if(dlg.IsSaved())
+    if(dlg.IsSaved() && dlg.IsEdited())
     {
         Refresh();
     }
@@ -99,17 +103,26 @@ void MainWindow::on_actionEdit_triggered()
 {
     CDIA_ADD_BIRTHDATE dlg;
 
-    int irow = ui->tableWidget->selectedItems().at(0)->row();
 
-    int ipkpersons = ui->tableWidget->item(irow, 0)->data(Qt::EditRole).toInt();
-
-    dlg.SetPKPersons(ipkpersons);
-
-    dlg.exec();
-
-    if(dlg.IsSaved())
+    auto qlist_selected = ui->tableWidget->selectedItems();
+    if(qlist_selected.size() > 0)
     {
-        Refresh();
+        int irow = qlist_selected.at(0)->row();
+
+        int ipkpersons = ui->tableWidget->item(irow, 0)->data(Qt::EditRole).toInt();
+
+        dlg.SetPKPersons(ipkpersons);
+
+        dlg.setWindowTitle("Edit");
+
+        dlg.exec();
+
+        if(dlg.IsSaved() && dlg.IsEdited())
+        {
+            Refresh();
+        }
+
+        ui->tableWidget->selectRow(irow);
     }
 }
 
@@ -123,5 +136,33 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 void MainWindow::on_actionRefresh_triggered()
 {
     Refresh();
+}
+
+
+void MainWindow::on_actionDelete_triggered()
+{
+    auto qlist_selected = ui->tableWidget->selectedItems();
+    if(qlist_selected.size() > 0)
+    {
+        int irow = qlist_selected.at(0)->row();
+
+        int ipkpersons = ui->tableWidget->item(irow, 0)->data(Qt::EditRole).toInt();
+
+        if (CManager_birthday_reminder::DeletePerson(ipkpersons))
+        {
+            Refresh();
+        }
+
+    ui->tableWidget->selectRow(irow);
+    }
+}
+
+
+void MainWindow::on_actionControls_triggered()
+{
+    QMessageBox msgbox;
+    msgbox.setWindowTitle("Controls");
+    msgbox.setText("To add new: Return Key\nTo edit: Control Key + Return Key\nTo Refresh: F5 Key\nTo delete: Delete Key\nTo Close: Escape Key");
+    msgbox.exec();
 }
 
